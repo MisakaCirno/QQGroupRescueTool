@@ -1,0 +1,111 @@
+﻿<Window x:Class="QQGroupRescueTool.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QQGroupRescueTool"
+        mc:Ignorable="d"
+        Title="帮助"
+        Height="450" Width="600"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Closed="Window_Closed" Loaded="Window_Loaded">
+    <TabControl>
+        <TabControl.Resources>
+            <Style TargetType="TabItem">
+                <Setter Property="MinWidth" Value="80"/>
+                <Setter Property="Padding" Value="20,5"/>
+            </Style>
+        </TabControl.Resources>
+        <TabItem Header="如何使用" MinWidth="80">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock" x:Key="Header">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="5,10"/>
+                        <Setter Property="FontSize" Value="16"/>
+                    </Style>
+                    <Style TargetType="TextBlock" x:Key="Content">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="Margin" Value="5,2"/>
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                    <Style TargetType="TextBlock" x:Key="Notice">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="5,2"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="Foreground" Value="Red"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Style="{StaticResource Notice}" Text="&gt;&gt;&gt;&gt;&gt;注意&lt;&lt;&lt;&lt;&lt;"/>
+                <TextBlock Style="{StaticResource Notice}" Text="仅支持老版本的QQ，而且需要群在被封禁后，群主没有解散群聊"/>
+                <TextBlock Style="{StaticResource Notice}" Text="新版本QQNT没有消息管理器，无法查找聊天记录"/>
+
+                <TextBlock Style="{StaticResource Header}" Text="一、从QQ中导出【txt格式】的聊天记录" />
+                <TextBlock Style="{StaticResource Content}" Text="1.QQ主面板左下角【三条横杠】 - 右上角的【消息管理】"/>
+                <TextBlock Style="{StaticResource Content}" Text="2.找到需要导出聊天记录的QQ群（群封禁后没有被群主解散，否则找不到）"/>
+                <TextBlock Style="{StaticResource Content}" Text="3.在群名称上右键 - 导出消息记录 - 保存类型选择为【文本文件(*.txt，不支持导入)】"/>
+
+                <TextBlock Style="{StaticResource Header}" Text="二、用该工具查找出所有在群里发过言的用户" />
+                <TextBlock Style="{StaticResource Content}" Text="1.在本软件中左上角的【打开】，选择从QQ中导出的【txt格式】的聊天记录"/>
+                <TextBlock Style="{StaticResource Content}" Text="2.勾选想导出的用户"/>
+                <TextBlock Style="{StaticResource Content}" Text="3.在列表上右键选择导出方式"/>
+                <TextBlock Style="{StaticResource Content}" Text="4.在新窗口中处理导出的数据"/>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="关于" MinWidth="80">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="Margin" Value="5"/>
+                        </Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Margin" Value="5"/>
+                            <Setter Property="Padding" Value="5"/>
+                        </Style>
+                    </Grid.Resources>
+                    
+                    <TextBlock Text="当前版本" Grid.Row="0" Grid.Column="2" Foreground="Blue"/>
+                    <TextBlock x:Name="Version_TextBlock" Grid.Row="1" Grid.Column="2" Foreground="Blue"/>
+
+                    <TextBlock Text="Github地址：" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox x:Name="GithubPage_TextBlock" IsReadOnly="True" Grid.Row="0" Grid.Column="1"/>
+
+                    <TextBlock Text="B站视频地址：" Grid.Row="1" Grid.Column="0"/>
+                    <TextBox x:Name="BilibiliPage_TextBlock" IsReadOnly="True" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+
+
+                <GroupBox Header="更新日志：" Grid.Row="1">
+                    <TextBox x:Name="UpdateLog_TextBox" IsReadOnly="True" TextWrapping="WrapWithOverflow"
+                             HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                             HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                             Margin="5" FontSize="12" Padding="5"/>
+                </GroupBox>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>

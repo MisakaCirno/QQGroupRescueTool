@@ -5,7 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QQGroupRescueTool"
         mc:Ignorable="d"
-        Title="QQ群抢救工具 V0.1" Height="450" Width="800">
+        Title="QQ群抢救工具" 
+        Height="800" Width="1000"
+        MinHeight="600" MinWidth="800"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,13 +17,156 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Menu>
-            <MenuItem Header="打开"/>
-            <MenuItem Header="生成"/>
-            <MenuItem Header="帮助"/>
-            <MenuItem Header="关于"/>
+            <Menu.Resources>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Padding" Value="10,5" />
+                </Style>
+            </Menu.Resources>
+            <MenuItem x:Name="OpenFile_MenuItem" Header="打开" Click="OpenFile_MenuItem_Click"/>
+            <MenuItem x:Name="Help_MenuItem" Header="帮助" Click="Help_MenuItem_Click"/>
+            <MenuItem Header="别点我">
+                <local:Tony/>
+            </MenuItem>
         </Menu>
-        
-        <Grid Grid.Row="1"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <GroupBox Header="排序：" Grid.Row="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5,2"/>
+                                <Setter Property="Padding" Value="5"/>
+                            </Style>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="Margin" Value="5,2"/>
+                                <Setter Property="Padding" Value="20,5"/>
+                            </Style>
+                        </Grid.Resources>
+                        <TextBlock Text="排序对象："/>
+                        <ComboBox x:Name="OrderBy_ComboBox" Grid.Column="1" SelectedIndex="4" SelectionChanged="OrderList_ComboBox_SelectionChanged">
+                            <ComboBoxItem Content="最近所用群名片"/>
+                            <ComboBoxItem Content="QQ号/邮箱"/>
+                            <ComboBoxItem Content="ID类型"/>
+                            <ComboBoxItem Content="最早发言时间"/>
+                            <ComboBoxItem Content="最晚发言时间"/>
+                            <ComboBoxItem Content="发言总数量"/>
+                        </ComboBox>
+
+                        <TextBlock Text="排序方式：" Grid.Column="2"/>
+                        <ComboBox x:Name="OrderMode_ComboBox" Grid.Column="3" SelectedIndex="1" SelectionChanged="OrderList_ComboBox_SelectionChanged">
+                            <ComboBoxItem Content="正序"/>
+                            <ComboBoxItem Content="倒序"/>
+                        </ComboBox>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Header="过滤：" Grid.Row="1" Visibility="Collapsed">
+                </GroupBox>
+
+                <GroupBox Header="群成员列表：" Grid.Row="2" Margin="2">
+                    <ListView x:Name="Member_ListView" Margin="5">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="ExportSelected_MenuItem" Header="导出所选项的邮箱" Click="ExportSelected_MenuItem_Click"/>
+                                <MenuItem x:Name="ExportAll_MenuItem" Header="导出所有项的邮箱" Click="ExportAll_MenuItem_Click"/>
+                                <Separator/>
+                                <MenuItem x:Name="CheckSelected_MenuItem" Header="勾选所选项" Click="CheckSelected_MenuItem_Click"/>
+                                <MenuItem x:Name="UncheckSelected_MenuItem" Header="取消勾选所选项" Click="UncheckSelected_MenuItem_Click"/>
+                                <MenuItem x:Name="InverseSelected_MenuItem" Header="反选所选项" Click="InverseSelected_MenuItem_Click"/>
+                                <Separator/>
+                                <MenuItem x:Name="SelectAll_MenuItem" Header="全选" Click="SelectAll_MenuItem_Click"/>
+                                <MenuItem x:Name="SelectNone_MenuItem" Header="全不选" Click="SelectNone_MenuItem_Click"/>
+                                <MenuItem x:Name="SelectInverse_MenuItem" Header="反选" Click="SelectInverse_MenuItem_Click"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="导出" Width="40">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding IsExport}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="最近所用群名片" Width="300" DisplayMemberBinding="{Binding Info.RecentName}"/>
+                                <GridViewColumn Header="QQ号/邮箱" Width="300" DisplayMemberBinding="{Binding Info.ID}"/>
+                                <GridViewColumn Header="ID类型" Width="80" DisplayMemberBinding="{Binding Info.IDTypeText}"/>
+                                <GridViewColumn Header="最早发言时间" Width="150" DisplayMemberBinding="{Binding Info.FirstMessageText}"/>
+                                <GridViewColumn Header="最晚发言时间" Width="150" DisplayMemberBinding="{Binding Info.LastMessageText}"/>
+                                <GridViewColumn Header="发言总数量" Width="100" DisplayMemberBinding="{Binding Info.MessageCount}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </GroupBox>
+
+            </Grid>
+
+            <GroupBox Header="成员详细信息：" Grid.Column="0" Margin="2">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="5"/>
+                            </Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Margin" Value="5,2"/>
+                                <Setter Property="Padding" Value="5"/>
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <TextBlock Text="最近所用群名片："/>
+                        <TextBox IsReadOnly="True" Text="{Binding ElementName=Member_ListView,Path=SelectedItem.Info.RecentName}"/>
+
+                        <TextBlock Text="QQ号/邮箱："/>
+                        <TextBox IsReadOnly="True" Text="{Binding ElementName=Member_ListView,Path=SelectedItem.Info.ID}"/>
+
+                        <TextBlock Text="ID类型："/>
+                        <TextBox IsReadOnly="True" Text="{Binding ElementName=Member_ListView,Path=SelectedItem.Info.IDTypeText,Mode=OneWay}"/>
+
+                        <TextBlock Text="最早发言时间："/>
+                        <TextBox IsReadOnly="True" Text="{Binding ElementName=Member_ListView,Path=SelectedItem.Info.FirstMessageText,Mode=OneWay}"/>
+
+                        <TextBlock Text="最晚发言时间："/>
+                        <TextBox IsReadOnly="True" Text="{Binding ElementName=Member_ListView,Path=SelectedItem.Info.LastMessageText,Mode=OneWay}"/>
+
+                        <TextBlock Text="发言总数量："/>
+                        <TextBox IsReadOnly="True" Text="{Binding ElementName=Member_ListView,Path=SelectedItem.Info.MessageCount}"/>
+
+                        <TextBlock Text="所有使用过的群名片："/>
+                        <ItemsControl ItemsSource="{Binding ElementName=Member_ListView,Path=SelectedItem.Info.Names}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Mode=OneWay}" IsReadOnly="True"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <TextBox x:Name="Temp_TextBox"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
+        </Grid>
 
         <StatusBar Grid.Row="2">
             <StatusBarItem Content="就绪"/>

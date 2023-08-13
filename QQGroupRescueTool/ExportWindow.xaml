@@ -1,0 +1,21 @@
+﻿<Window x:Class="QQGroupRescueTool.ExportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QQGroupRescueTool"
+        mc:Ignorable="d"
+        Title="导出邮箱" Height="450" Width="800"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="Output_TextBox" Grid.Row="0" Margin="5" 
+                 AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"
+                 HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+        <Button x:Name="Copy_Button" Content="复制" Grid.Row="1" Margin="5" Padding="20,10" Click="Copy_Button_Click"/>
+    </Grid>
+</Window>

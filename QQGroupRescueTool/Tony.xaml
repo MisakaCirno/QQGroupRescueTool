@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="QQGroupRescueTool.Tony"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QQGroupRescueTool"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="350"
+             MinHeight="800" MaxHeight="800"
+             MinWidth="350" MaxWidth="350">
+    <Grid Background="Black">
+        <Grid Margin="10,0" Background="Yellow">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
+            </Grid.Resources>
+
+            <Label Content="正宗UI库Tony牌" Foreground="Black" FontSize="40" FontWeight="Bold"/>
+
+            <Grid Background="Blue" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="我&#x000A;从&#x000A;小&#x000A;用&#x000A;到&#x000A;大" 
+                       Foreground="Yellow" Background="Red" FontSize="25" BorderBrush="Yellow" BorderThickness="2" Margin="5,20" FontWeight="Bold"/>
+                <Label Content="Tony&#x000A; 美照" Grid.Column="1"  Foreground="White" FontSize="80" FontWeight="Bold"/>
+            </Grid>
+
+            <Label Content="5年坚持" Grid.Row="2" Foreground="White" Background="Red" FontSize="70" FontWeight="Bold" Margin="10,2"/>
+
+            <Label Content="在上海市用新鲜键盘" Grid.Row="3" Foreground="Red" FontSize="35" FontWeight="Bold"/>
+
+            <Label Content="现写" Grid.Row="4" Foreground="Yellow" Background="Blue" FontSize="140" FontWeight="Bold" Margin="10,2"/>
+
+            <Grid Grid.Row="5" Background="Red" Margin="10,2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Label Content="敢承诺" Grid.Row="0" Foreground="White" FontSize="50" FontWeight="Bold"/>
+
+                <Label Content="用了跟我一样美丽" Grid.Row="1" Foreground="White" FontSize="35" FontWeight="Bold"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
